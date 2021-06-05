@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ToDo app</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div id="mydiv" class="header">
+            <h2>To Do List</h2>
+            <input type="text" id="in1" placeholder="type here">
+            <span class="addbtn" onclick="addList()">ADD</span>
+        </div>
+
+        <ul id="list">
+            <li>Buy Notebooks</li>
+            <li class="checked">Pay fees</li>
+            <li>Visit temple</li>
+            <li>Buy phone case</li>
+        </ul>
+
+        <script>
+            var myNodelist = document.getElementsByTagName("li");
+            var i;
+            for(i=0;i<myNodelist.length;i++){
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className="close";
+                span.appendChild(txt);
+                myNodelist[i].appendChild(span);            
+            }
+
+            var close = document.getElementsByClassName("close");
+            var i;
+            for(i=0;i<close.length;i++){
+                close[i].onclick=function(ev){
+
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                    
+                }
+            }
+
+            var list = document.querySelector('ul');
+            list.addEventListener('click', function(ev){
+                if(ev.target.tagName == "li"){
+                    ev.target.classList.toggle('checked');
+                }
+            },false);
+
+            function addList(){
+                 var li = document.createElement("li");
+
+                var input1 = document.getElementById("in1").value;
+                var t = document.createTextNode(input1);
+                li.appendChild(t);
+
+                if(input1 == ""){
+                    alert("Write something");
+                }
+
+                else{
+                    document.getElementById("list").appendChild(li);
+                }
+
+                document.getElementById("in1").value = "";
+
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className="close";
+                span.appendChild(txt);
+                li.appendChild(span);
+
+                for(i=0;i<close.length;i++){
+                    close[i].onclick=function(ev){
+
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                    
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
